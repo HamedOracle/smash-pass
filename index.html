@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smash or Pass</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div class="landing-page" id="landingPage">
+        <button class="admin-btn" id="adminBtn">Admin</button>
+        <h1>Smash or Pass</h1>
+        <p>Test your taste by choosing whether you'd smash or pass on these images. Click start to begin!</p>
+        <button class="start-btn" id="startBtn">Start</button>
+    </div>
+    
+    <!-- Name Input Modal -->
+    <div class="modal" id="nameModal">
+        <div class="modal-content">
+            <h2>Enter Your Name</h2>
+            <input type="text" id="userName" placeholder="Your name...">
+            <button id="submitName">Let's Go!</button>
+        </div>
+    </div>
+    
+    <!-- Test Selection Page -->
+    <div class="test-selection-page" id="testSelectionPage">
+        <div class="user-info" id="userInfo"></div>
+        <h2>Choose a Test</h2>
+        <div class="tests-list" id="testsList"></div>
+        <button class="back-btn" id="backToLandingBtn">Back</button>
+    </div>
+    
+    <!-- Game Page -->
+    <div class="game-page" id="gamePage">
+        <div class="user-info" id="gameUserInfo"></div>
+        <div class="score-display" id="scoreDisplay"></div>
+        <img src="" alt="Game Image" class="game-image" id="gameImage">
+        <div class="buttons-container">
+            <button class="pass-btn" id="passBtn">Pass</button>
+            <button class="smash-btn" id="smashBtn">Smash</button>
+        </div>
+    </div>
+    
+    <!-- Results Page -->
+    <div class="results-page" id="resultsPage">
+        <div class="user-info" id="resultsUserInfo"></div>
+        <h2>Test Results</h2>
+        <div class="results-container" id="resultsContainer"></div>
+        <button class="back-btn" id="backToTestsBtn">Back to Tests</button>
+    </div>
+    
+    <!-- Admin Login Modal -->
+    <div class="admin-login" id="adminLogin">
+        <div class="admin-content">
+            <h2>Admin Login</h2>
+            <input type="text" id="adminUsername" placeholder="Username">
+            <input type="password" id="adminPassword" placeholder="Password">
+            <button id="loginBtn">Login</button>
+        </div>
+    </div>
+    
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <div class="admin-header">
+            <h1>Admin Dashboard</h1>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+        
+        <button class="add-test-btn" id="addTestBtn">Add New Test</button>
+        
+        <div class="tests-container" id="testsContainer"></div>
+    </div>
+    
+    <!-- Add/Edit Test Modal -->
+    <div class="test-modal" id="testModal">
+        <div class="test-modal-content">
+            <h2 id="testModalTitle">Add New Test</h2>
+            <input type="text" id="testName" placeholder="Test Name">
+            <textarea id="testDescription" placeholder="Test Description"></textarea>
+            
+            <div class="image-upload">
+                <label for="imageUpload">Add Images:</label>
+                <input type="file" id="imageUpload" multiple accept="image/*">
+                <div class="image-preview" id="imagePreview"></div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="save-btn" id="saveTestBtn">Save</button>
+                <button class="cancel-btn" id="cancelTestBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
