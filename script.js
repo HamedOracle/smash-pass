@@ -81,7 +81,6 @@ let tests = JSON.parse(localStorage.getItem('smashOrPassTests')) || [
 
 let currentEditingTest = null;
 
-// Initialize the app
 function init() {
     saveTestsToLocalStorage();
     setupEventListeners();
@@ -97,19 +96,31 @@ function setupEventListeners() {
     startBtn.addEventListener('click', showNameModal);
     adminBtn.addEventListener('click', showAdminLogin);
     
+    // Close modals when clicking outside
+    nameModal.addEventListener('click', (e) => {
+        if (e.target === nameModal) {
+            nameModal.style.display = 'none';
+        }
+    });
+    
+    adminLogin.addEventListener('click', (e) => {
+        if (e.target === adminLogin) {
+            adminLogin.style.display = 'none';
+        }
+    });
+
+    testModal.addEventListener('click', (e) => {
+        if (e.target === testModal) {
+            testModal.style.display = 'none';
+        }
+    });
+    
     submitName.addEventListener('click', handleNameSubmit);
     backToLandingBtn.addEventListener('click', goBackToLanding);
     backToTestsBtn.addEventListener('click', goBackToTests);
     
     passBtn.addEventListener('click', () => handleChoice('pass'));
     smashBtn.addEventListener('click', () => handleChoice('smash'));
-    
-    // Close admin login when clicking outside
-    adminLogin.addEventListener('click', (e) => {
-        if (e.target === adminLogin) {
-            adminLogin.style.display = 'none';
-        }
-    });
     
     loginBtn.addEventListener('click', handleAdminLogin);
     logoutBtn.addEventListener('click', handleAdminLogout);
@@ -122,6 +133,7 @@ function setupEventListeners() {
 
 // Show name input modal
 function showNameModal() {
+    userName.value = '';
     nameModal.style.display = 'flex';
 }
 
@@ -387,7 +399,7 @@ function deleteTest(testId) {
     }
 }
 
-// Handle save test
+// Handle save test - FIXED VERSION
 function handleSaveTest() {
     if (testName.value.trim() === '') {
         alert('Please enter a test name');
@@ -397,7 +409,13 @@ function handleSaveTest() {
     const images = [];
     const previewItems = imagePreview.querySelectorAll('.image-preview-item img');
     previewItems.forEach(item => {
-        images.push(item.src);
+        // Check if it's a data URL (new upload) or existing URL
+        if (item.src.startsWith('data:')) {
+            images.push(item.src);
+        } else {
+            // For existing images that weren't changed
+            images.push(item.src);
+        }
     });
     
     if (images.length === 0) {
@@ -413,7 +431,11 @@ function handleSaveTest() {
                 ...tests[testIndex],
                 name: testName.value.trim(),
                 description: testDescription.value.trim(),
-                images: images
+                images: images,
+                // Preserve existing stats
+                totalPlays: tests[testIndex].totalPlays,
+                totalSmashes: tests[testIndex].totalSmashes,
+                totalPasses: tests[testIndex].totalPasses
             };
         }
     } else {
@@ -434,6 +456,5 @@ function handleSaveTest() {
     testModal.style.display = 'none';
     renderAdminTests();
 }
-
 // Initialize the app
 init();
